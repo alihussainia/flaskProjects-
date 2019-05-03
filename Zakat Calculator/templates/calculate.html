@@ -1,0 +1,106 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+
+{% from '_includes/_formhelpers.html' import render_field %}
+
+<div class="jumbotron">
+
+    <h1 class="text-center">Zakat Calculator</h1>
+    <h3>Currency</h3>
+    <div class="row">
+    <div class="col-sm-8">
+    <form>
+        
+        FROM: <select name="currency_from">
+                {% for currency in currencies %}
+                    <option value="{{currency}}" class="form-control option-box" {{'selected="selected"' if currency_from==currency}}>{{currency}}</option>
+                {% endfor %}
+              </select>
+        
+         TO: <select name="currency_to">
+                {% for currency in currencies %}
+                    <option value="{{currency}}" class="form-control option-box" {{'selected="selected"' if currency_to==currency}}>{{currency}}</option>
+                {% endfor %}
+              </select>
+           
+             <button style="margin-left:20px;" type="submit" class="btn btn-success btn-adjust">Submit</button>
+           
+    </form>
+    <h5> 
+        1 {{currency_from }} = {{currency_to}} {{rate | round(4)}} 
+      </h5>
+  </div>
+
+<div class="col-sm-4">
+<form class="form-inline" >
+   {{render_field(currnecy_form.amount , class_ = 'form-inline') }}
+
+  <button type="submit" class="btn btn-success btn-adjust">Submit</button>
+  </form>
+  currnecy_form.amount
+</div>
+</div>
+    <hr>
+    <div class="row">
+            <div class="col-sm-8">
+
+                    <form method="POST">
+  
+                            <div class="form-group">
+                              {{render_field(form.gold , class_ = 'form-control')}}
+                            </div>
+                        
+                            <div class="form-group">
+                              {{render_field(form.silver , class_ = 'form-control')}}
+                            </div>
+                        
+                        
+                            <div class="form-group">
+                              {{render_field(form.cash , class_ = 'form-control')}}
+                            </div>
+                        
+                            <div class="form-group">
+                              {{render_field(form.properties , class_ = 'form-control')}}
+                            </div>
+                        
+                            <div class="form-group">
+                              {{render_field(form.liabilities , class_ = 'form-control')}}
+                            </div>
+                        
+                            <input type="submit" value="Submit" class="btn btn-success" />
+                            <br>
+                            <hr>
+                        
+                            <h4> <a href="/registration" class="btn btn-success">Register Yourself</a> to Save Information!</h4>
+                          </form>
+    
+            </div>
+
+            <div class="col-sm-4">
+                <br>
+                <br>
+                    <h2>NISAB VALUES</h2>
+                    <div style="border-top: 4px solid #339999; width: 100px;"></div>
+                    <br>
+        
+                    <h3><b>SILVER NISAB <h5> 612.36 grams | 61.1 Tola </h5></b></h3>
+                    <div style="border-top: 4px solid #339999; width: 50px;"></div>
+                    <br>
+        
+                    <h3 style="color: #339999"><b>{{612.36 * 77.1}} <small>{{'Rupees'}}</b></small></h3>
+                    <br>
+                    <h3><b>GOLD NISAB <h5>87.48 grams | 7.5 Tola </h5> </b> </h3>
+                    <div style="border-top: 4px solid #339999; width: 50px;"></div>
+                    <br>
+        
+                    <h3 style="color: #339999"><b>{{87.48 * 6001.4}} <small>{{'Rupees'}}</b></small></h3></div>
+        </div>
+
+
+
+
+
+</div>
+
+{% endblock %}
